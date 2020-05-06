@@ -7,12 +7,39 @@ const Container = styled.div`
   border: 1px solid red;
   height: 400px;
   width: 50%;
+  padding: 10px;
+`;
+
+const SelectorBox = styled.div`
+  width: 100%;
+  height: fit-content;
+  border: 1px solid #d9d9d9;
+
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const Segment = styled.span`
+  border-radius: 2px;
+  background-color: #f5f5f5;
+  margin: 2px 4px 2px 0px;
+  padding: 2px 4px 2px 8px;
+  font-size: 14px;
+  display: inline-block;
 `;
 
 const DetailView = styled.div`
   border: 1px solid blue;
   height: 300px;
-  width: 50%;
+  width: 100%;
+  overflow: auto;
+`;
+
+const DetailList = styled.div`
+  padding: 4px;
+  &:hover {
+    background-color: #f5f5f5;
+  }
 `;
 
 /**
@@ -38,12 +65,31 @@ const Select01Presenter = ({
 
   return (
     <Container  >
-      <div tabIndex={0} ref={ref} onClick={e => {
+
+      <SelectorBox tabIndex={0} ref={ref} onClick={e => {
         e.preventDefault();
         changeShowDetailState()
-      }}>Select01Presenter Component</div>
+      }}>
+        {data.map((val, i) => { 
+          return val.selector ? (
+            <Segment key={i}>
+              {val.id}
+            </Segment>
+          ) : null
+        })}
 
-      {showDetailState && <DetailView>DetailView</DetailView>}
+        <input />
+      </SelectorBox>
+
+      {showDetailState && (
+        <DetailView>
+          {data.map((val, i) => (
+            <DetailList key={i}>
+              {val.id}
+            </DetailList>
+          ))}
+        </DetailView>
+      )}
     </Container>
   );
 }

@@ -21,6 +21,6 @@ const Header = styled.header`
 
 export default withRouter(({ location: { pathname } }) => (
   <Header>
-    Header Component
+    Pokganmika UI
   </Header>
 ))
